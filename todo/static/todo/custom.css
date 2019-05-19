@@ -1,0 +1,48 @@
+.title {
+    margin-top: 30px;
+    font-family: Roboto;
+    font-weight: 300;
+}
+
+.item{
+    margin-bottom: -10px;
+}
+
+.icon-button{
+    opacity: .3;
+    margin-left: 10px;
+}
+
+.icon-button:hover{
+    opacity: 1;
+}
+
+.footer{
+    margin-top: 80px;
+}
+
+.soc {
+    display: inline-block;
+    margin: 40px;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    border-radius: 50%;
+    text-align: center;
+    box-shadow: 0 3px 20px rgba(0,0,0,.25),
+  }
+
+.btn-circle {
+    margin: 10px;
+    width: 38px;
+    height: 38px;
+    border-radius: 19px;
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 16px;
+}
+
+.btn-circle:hover{
+    box-shadow: 0 3px 20px rgba(0,0,0,.25),
+}
