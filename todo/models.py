@@ -4,7 +4,7 @@ from django.db import models
 class Task(models.Model):
     task = models.CharField(max_length=30)
     description = models.CharField(max_length=50)
-
+    done = models.BooleanField(default=False)
     create = models.DateField(auto_now=true)
     exp = models.DateTimeField()
 
