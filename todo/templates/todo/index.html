@@ -46,7 +46,9 @@
                     <div class="card-body count_info">
                         {% if count_tasks != 0 %}
                     <br>
-                        <p class="text-center text-secondary">You have completed {{ done_tasks }} of {{ count_tasks }} tasks.</p>
+                        <p class="text-center text-secondary animated fadeIn">You have completed {{ done_tasks }} of {{ count_tasks }} tasks. {% if done_tasks == count_tasks %}
+                            👍
+                        {% endif %}</p>
                     <br>
                     {% endif %}
                     </div>
