@@ -12,12 +12,13 @@ def index(request):
             task = form.cleaned_data['task']
             description = form.cleaned_data['description']
             form.save()
-
+    
     form = TaskForm()
 
     tasks = Task.objects.all()
     all_tasks = []
 
+    done_tasks = 0
     for task in tasks:
         task_info = {
             'id': task.id,
@@ -26,9 +27,12 @@ def index(request):
             'done': task.done,
             'date': task.date
         }
+        if task.done == True:
+            done_tasks += 1
         all_tasks.append(task_info)
     all_tasks.reverse()
-    context = {'all_tasks': all_tasks}
+    count_tasks = len(all_tasks)
+    context = {'all_tasks': all_tasks, 'count_tasks': count_tasks, 'done_tasks': done_tasks}
 
     return render(request, 'todo/index.html', context)
 
@@ -62,6 +66,3 @@ def delete(request, id):
         return HttpResponseRedirect("/")
     except Task.DoesNotExist:
         return HttpResponseNotFound("<h2>Произошла ошибка!</h2>")
-
-def edit(request, id):
-    return HttpResponseRedirect("/")

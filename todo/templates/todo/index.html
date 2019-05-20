@@ -1,42 +1,60 @@
 {% extends "layout/basic.html" %}
 
 {% block content %}
-<h2 class="text-center title">To do list...</h2><br>
 <div class="container-fluid">
-    <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6 col-12">
-            <a href="add">
-                <p class="text-right text-primary">Add Task</p>
-            </a>
-            <div class="card shadow">
-                {% for task in all_tasks %}
-                <div class="card-body">
-                    <div class="row item">
-                        <div class="col-8">
-                            {% if task.done == False %}
+    <h2 class="text-center title">To do list...</h2><br>
+    <div class="container-fluid animated pulse">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6 col-12">
+                <a href="add">
+                    <p class="text-right text-primary">Add Task</p>
+                </a>
+                <div class="card shadow">
+                    {% if count_tasks == 0 %}
+                    <div class="card-body no-tasks">
+                    <br>
+                        <p class="text-center text-secondary">You have no tasks. 😎</p>
+                        <p class="text-center text-secondary">You can <a href="add">add a new task</a>.</p>
+                    <br>
+                    
+                    </div>
+                    {% endif %}
+
+                    {% for task in all_tasks %}
+                    <div class="card-body">
+                        <div class="row item">
+                            <div class="col-8">
+                                {% if task.done == False %}
                                 <a href="done/{{ task.id }}"><i class="far fa-square text-dark"></i></a>
                                 <b class="item-task">{{ task.task }}</b>
                                 <p class="item-desc">{{ task.description }}</p>
-                            {% endif %}
-                            {% if task.done == True %}
-                            <a href="undo/{{ task.id }}"><i class="far fa-check-square text-muted"></i></a>
+                                {% endif %}
+                                {% if task.done == True %}
+                                <a href="undo/{{ task.id }}"><i class="far fa-check-square text-muted"></i></a>
                                 <s><b class="item-task text-muted">{{ task.task }}</b>
-                                <p class="item-desc text-muted">{{ task.description }}</p></s>
-                            {% endif %}
+                                    <p class="item-desc text-muted">{{ task.description }}</p>
+                                </s>
+                                {% endif %}
+                            </div>
+                            <div class="col-4 text-right">
+                                <a href="delete/{{ task.id }}"><i class="fas fa-trash text-danger icon-button"></i></a>
+                            </div>
                         </div>
-                        <div class="col-4 text-right">
-                            <a href="edit/{{ task.id }}"><i class="fas fa-pen text-dark icon-button"></i></a>
-                            <a href="delete/{{ task.id }}"><i class="fas fa-trash text-danger icon-button"></i></a>
-                        </div>
+                        <hr>
                     </div>
-                    <hr>
+                    {% endfor %}
+                    <div class="card-body count_info">
+                        {% if count_tasks != 0 %}
+                    <br>
+                        <p class="text-center text-secondary">You have completed {{ done_tasks }} of {{ count_tasks }} tasks.</p>
+                    <br>
+                    {% endif %}
+                    </div>
+                    
                 </div>
-                {% endfor %}
-                <p class="text-center text-secondary">Well done!😎</p>
             </div>
         </div>
     </div>
-</div>
 
 
-{% endblock  %}
+    {% endblock  %}
