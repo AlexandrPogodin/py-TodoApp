@@ -28,9 +28,9 @@
          <span class="navbar-text mr-4">
             Hi, {{ user.get_username }}
          </span>
-         <a class="btn btn-outline-primary" href="/signup/">Login</a>
+         <a class="btn btn-outline-dark" href="/accounts/logout">Logout</a>
          {% else %}
-         <a class="btn btn-outline-primary" href="{% url 'signup' %}">Sign up</a>
+         <a class="btn btn-outline-dark" href="/accounts/login">Login</a>
          {% endif %}
          </div>
          
