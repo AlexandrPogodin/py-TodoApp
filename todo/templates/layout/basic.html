@@ -2,54 +2,64 @@
 
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Todo App - {% block title %}Главная{% endblock %}</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{% static 'todo/css/custom.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'todo/css/animate.css' %}">
-    <link rel="shortcut icon" type="image/png" href="{% static 'todo/favicon.ico' %}">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&amp;subset=cyrillic" rel="stylesheet">
-</head>
-<body>
-    <body class="bg-gradient">
-    <div class="d-none d-md-block">
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3">
-        <h5 class="my-0 mr-md-auto font-weight-normal">POGODIN</h5>
-        <nav class="my-2 my-md-0 mr-md-3">
-         {% block nav-menu1 %}
-            <a class="p-2 text-dark navb" href="/contacts">Contacts</a>
-         {% endblock nav-menu1 %}
-        </nav>
-        <a class="btn btn-outline-primary navb" href="/admin">Admin</a>
-    </div>
-    </div>
-    {% block content %}
-    {% endblock content %}
-    {% block footer %}
-        <div class="container footer text-center">
-      <p>
-         Developed by <a href="https://github.com/AlexandrPogodin" target="_blank"><strong class="text-dark"><i class="fab fa-github"></i>AlexandrPogodin</strong></a>.
-      </p>
-      <div class="row justify-content-center">
-         <div class="col-6">
 
-            <a class="btn btn-circle btn-outline-dark" href="https://vk.me/alexandrpogodin" target="_blank">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Todo App - {% block title %}Главная{% endblock %}</title>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+   <link rel="stylesheet" type="text/css" href="{% static 'todo/css/custom.css' %}">
+   <link rel="stylesheet" type="text/css" href="{% static 'todo/css/animate.css' %}">
+   <link rel="shortcut icon" type="image/png" href="{% static 'todo/favicon.ico' %}">
+   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&amp;subset=cyrillic"
+      rel="stylesheet">
+</head>
+
+<body>
+
+   <body class="bg-gradient">
+      <nav class="navbar navbar-light">
+         <a class="navbar-brand" href="/">POGODIN</a>
+         <div>
+         {% if user.is_authenticated %}
+         <span class="navbar-text mr-4">
+            Hi, {{ user.get_username }}
+         </span>
+         <a class="btn btn-outline-primary" href="/signup/">Login</a>
+         {% else %}
+         <a class="btn btn-outline-primary" href="{% url 'signup' %}">Sign up</a>
+         {% endif %}
+         </div>
+         
+      </nav>
+      {% block content %}
+      {% endblock content %}
+      {% block footer %}
+      <div class="container footer text-center">
+         <p>
+            Developed by <a href="https://github.com/AlexandrPogodin" target="_blank"><strong class="text-dark"><i
+                     class="fab fa-github"></i>AlexandrPogodin</strong></a>.
+         </p>
+         <div class="row justify-content-center">
+            <div class="col-6">
+
+               <a class="btn btn-circle btn-outline-dark" href="https://vk.me/alexandrpogodin" target="_blank">
                   <span class="icon">
                      <i class="fab fa-vk"></i>
                   </span>
-            </a>
-            <a class="btn btn-circle btn-outline-dark" href="https://t.me/alexandrpogodin" target="_blank">
+               </a>
+               <a class="btn btn-circle btn-outline-dark" href="https://t.me/alexandrpogodin" target="_blank">
                   <span class="icon">
                      <i class="fab fa-telegram-plane"></i>
                   </span>
-            </a>
+               </a>
             </div>
          </div>
       </div>
-    {% endblock footer %}
-</body>
+      {% endblock footer %}
+   </body>
+
 </html>
