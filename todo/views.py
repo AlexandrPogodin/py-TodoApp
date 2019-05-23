@@ -36,6 +36,9 @@ def index(request):
 
     return render(request, 'todo/index.html', context)
 
+def contacts(request):
+    return render(request, 'todo/contacts.html')
+
 def add(request):
     form = TaskForm()
     context = {'form': form}
