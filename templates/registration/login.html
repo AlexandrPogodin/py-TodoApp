@@ -23,8 +23,8 @@
                             <button type="submit" class="mt-2 btn btn-outline-dark">Login</button>
                         </form>
                         {# Assumes you setup the password_reset view in your URLconf #}
-                        <br>
-                        <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+                        {% comment %} <br>
+                        <p><a href="{% url 'password_reset' %}">Lost password?</a></p> {% endcomment %}
                         <br>
                         <p>Don't have an account? <a href="{% url 'signup' %}">Sign up!</a></p>
                     </div>
