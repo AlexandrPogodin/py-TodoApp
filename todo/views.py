@@ -13,17 +13,7 @@ def index(request):
     username = 'default'
     if request.user.is_authenticated:
         username = request.user.username
-        
-    # if request.method == "POST":
-    #     form = TaskForm(request.POST)
-    #     if form.is_valid():
-    #         task = form.cleaned_data['task']
-    #         description = form.cleaned_data['description']
-    #         form.save()
-    #     else:
-    #         print('error')
-    
-    # form = TaskForm()
+
     tasks = Task.objects.filter(author=username)
     all_tasks = []
 
