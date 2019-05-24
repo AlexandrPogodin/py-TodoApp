@@ -2,7 +2,15 @@
 
 {% block content %}
 <div class="container-fluid">
-    <h2 class="text-center title animated fadeIn delay-3s">To do list...</h2><br>
+    {% if user.is_authenticated %}
+    <h1 class="text-center title animated fadeIn delay-2s">Hi, {{ user.get_username }}.</h1>
+    <h2 class="text-center title animated fadeIn delay-3s">It's your to do list...</h2><br>
+    
+    {% else %}
+    <h1 class="text-center title animated fadeIn delay-2s">It's example to do list...</h1><br>
+    <h2 class="text-center title animated fadeIn delay-3s"><a href="{% url 'signup' %}">Sign up</a> to create your list</h2><br>
+    {% endif %}
+    {% comment %} <h2 class="text-center title animated fadeIn delay-3s">To do list...</h2><br> {% endcomment %}
     <div class="container-fluid">
         <div class="row justify-content-center ">
             <div class="col-md-8 col-lg-6 col-12 animated pulse">
@@ -12,11 +20,11 @@
                 <div class="card shadow">
                     {% if count_tasks == 0 %}
                     <div class="card-body no-tasks">
-                    <br>
+                        <br>
                         <p class="text-center text-secondary">You have no tasks. 😎</p>
                         <p class="text-center text-secondary">You can <a href="add">add a new task</a>.</p>
-                    <br>
-                    
+                        <br>
+
                     </div>
                     {% endif %}
 
@@ -45,14 +53,15 @@
                     {% endfor %}
                     <div class="card-body count_info">
                         {% if count_tasks != 0 %}
-                    <br>
-                        <p class="text-center text-secondary animated fadeIn">You have completed {{ done_tasks }} of {{ count_tasks }} tasks. {% if done_tasks == count_tasks %}
+                        <br>
+                        <p class="text-center text-secondary animated fadeIn">You have completed {{ done_tasks }} of
+                            {{ count_tasks }} tasks. {% if done_tasks == count_tasks %}
                             👍
-                        {% endif %}</p>
-                    <br>
-                    {% endif %}
+                            {% endif %}</p>
+                        <br>
+                        {% endif %}
                     </div>
-                    
+
                 </div>
             </div>
         </div>
