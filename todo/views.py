@@ -7,6 +7,7 @@ from .forms import TaskForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+<<<<<<< HEAD
 from django.contrib.auth.decorators import login_required
 
 def index(request):
@@ -24,6 +25,25 @@ def index(request):
     #         print('error')
     
     # form = TaskForm()
+=======
+
+def index(request):
+    username = ''
+    if request.user.is_authenticated:
+        username = request.user.username
+        
+    if request.method == "POST":
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            task = form.cleaned_data['task']
+            description = form.cleaned_data['description']
+            form.save()
+        else:
+            print('error')
+    
+    form = TaskForm()
+    print(username)
+>>>>>>> 700c331f59384a89f7bc72f1ed8b7bd53f598264
     tasks = Task.objects.filter(author=username)
     all_tasks = []
 

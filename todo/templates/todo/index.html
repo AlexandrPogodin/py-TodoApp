@@ -4,10 +4,17 @@
 <div class="container-fluid">
     {% if user.is_authenticated %}
     <h1 class="text-center title animated fadeIn delay-2s">Hi, {{ user.get_username }}.</h1>
+<<<<<<< HEAD
     <h2 class="text-center title animated fadeIn delay-3s">It's your to-do list...</h2><br>
     
     {% else %}
     <h1 class="text-center title animated fadeIn delay-2s">It's example to-do list...</h1><br>
+=======
+    <h2 class="text-center title animated fadeIn delay-3s">It's your to do list...</h2><br>
+    
+    {% else %}
+    <h1 class="text-center title animated fadeIn delay-2s">It's example to do list...</h1><br>
+>>>>>>> 700c331f59384a89f7bc72f1ed8b7bd53f598264
     <h2 class="text-center title animated fadeIn delay-3s"><a href="{% url 'signup' %}">Sign up</a> to create your list</h2><br>
     {% endif %}
     {% comment %} <h2 class="text-center title animated fadeIn delay-3s">To do list...</h2><br> {% endcomment %}
