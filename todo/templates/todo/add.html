@@ -12,13 +12,13 @@
                 <div class="row justify-content-center">
                     <div class="col-10">
                         <br>
-                        <form action="/" method="post">
+                        <form method="post">
                             {% csrf_token %}
                             {{ form.as_p }}
                             {% if user.is_authenticated %}
                                 <input type="hidden" name="author" value="{{ user.get_username }}">
                             {% else %}
-                                <input type="hidden" name="author" value=''>
+                                <input type="hidden" name="author" value="default">
                             {% endif %}
                             <input type="submit" name="send" value="Add task" class="mt-2 btn btn-outline-dark">
                         </form>

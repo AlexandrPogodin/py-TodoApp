@@ -7,23 +7,23 @@ from .forms import TaskForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 def index(request):
-    username = ''
+    username = 'default'
     if request.user.is_authenticated:
         username = request.user.username
         
-    if request.method == "POST":
-        form = TaskForm(request.POST)
-        if form.is_valid():
-            task = form.cleaned_data['task']
-            description = form.cleaned_data['description']
-            form.save()
-        else:
-            print('error')
+    # if request.method == "POST":
+    #     form = TaskForm(request.POST)
+    #     if form.is_valid():
+    #         task = form.cleaned_data['task']
+    #         description = form.cleaned_data['description']
+    #         form.save()
+    #     else:
+    #         print('error')
     
-    form = TaskForm()
-    print(username)
+    # form = TaskForm()
     tasks = Task.objects.filter(author=username)
     all_tasks = []
 
@@ -60,33 +60,57 @@ def signup(request):
         form = UserCreationForm()
     return render(request, 'registration/signup.html', {'form': form})
 
+@login_required(login_url='/accounts/login/')
 def add(request):
+    if request.method == "POST":
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            task = form.cleaned_data['task']
+            description = form.cleaned_data['description']
+            form.save()
+            return redirect('home')
+        else:
+            print('error')
+    
     form = TaskForm()
     context = {'form': form}
     return render(request, 'todo/add.html', context)
 
 def done(request, id):
+    username = 'default'
+    if request.user.is_authenticated:
+        username = request.user.username
     try:
         task = Task.objects.get(id=id)
-        task.done = True
-        task.save()
+        if task.author == username:
+            task.done = True
+            task.save()
         return HttpResponseRedirect("/")
     except Task.DoesNotExist:
         return HttpResponseNotFound("<h2>Произошла ошибка!</h2>")
 
 def undo(request, id):
+    username = 'default'
+    if request.user.is_authenticated:
+        username = request.user.username
     try:
         task = Task.objects.get(id=id)
-        task.done = False
-        task.save()
+        if task.author == username:
+            task.done = False
+            task.save()
         return HttpResponseRedirect("/")
     except Task.DoesNotExist:
         return HttpResponseNotFound("<h2>Произошла ошибка!</h2>")
 
+@login_required(login_url='/accounts/login/')
 def delete(request, id):
+    username = 'default'
+    if request.user.is_authenticated:
+        username = request.user.username
     try:
         task = Task.objects.get(id=id)
-        task.delete()
+        if task.author == username or username == 'admin':
+            task.delete()
         return HttpResponseRedirect("/")
     except Task.DoesNotExist:
         return HttpResponseNotFound("<h2>Произошла ошибка!</h2>")
